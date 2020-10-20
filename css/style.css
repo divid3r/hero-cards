@@ -1,0 +1,27 @@
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.hero__title {
+  text-align: center;
+}
+.hero__cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+.hero__card {
+  width: 200px;
+  height: 355px;
+  margin: 6px;
+  cursor: pointer;
+}
+.hero__card .hero__photo {
+  overflow: hidden;
+  height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.hero__card .hero__photo img {
+  height: 355px;
+}
