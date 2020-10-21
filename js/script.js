@@ -23,10 +23,20 @@ const renderCard = (data) => {
       heroCard.innerHTML = `
          <div class="hero__photo"><img src="db_heroes/${elem['photo']}" alt="" /></div>
          <div class="hero__name">${elem['name']}</div>
-         <div class="hero__real-name">${elem['realname']}</div>  
+         <div class="hero__real-name">${elem['realName']}</div>  
       `
       heroCards.appendChild(heroCard)
    });
 }
+
+const renderCardModal = () => {
+   
+}
+
+heroCards.addEventListener('click', (event) => {
+   let target = event.target;
+
+   console.log(target);
+});
 
 
