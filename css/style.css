@@ -112,6 +112,22 @@ body {
   width: 35px;
   height: 35px;
 }
+.hero__card-big .arrow {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+}
+.hero__card-big .arrow-left {
+  background: url(../img/chevron-left.svg) center center no-repeat;
+  left: -25%;
+  top: calc(50% - 20px);
+}
+.hero__card-big .arrow-right {
+  background: url(../img/chevron-right.svg) center center no-repeat;
+  right: -25%;
+  top: calc(50% - 20px);
+}
 .hero__card-big .hero__photo-big img {
   width: 400px;
 }
