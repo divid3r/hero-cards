@@ -84,3 +84,55 @@ body {
   font-size: 14px;
   transition: color 0.3s ease-in-out;
 }
+.hero__popup {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(51, 51, 51, 0.8);
+}
+.hero__card-big {
+  width: 1024px;
+  height: 600px;
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+}
+.hero__card-big .hero__popup-close-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+.hero__card-big .hero__popup-close-btn img {
+  width: 35px;
+  height: 35px;
+}
+.hero__card-big .hero__photo-big img {
+  width: 400px;
+}
+.hero__card-big .hero__info {
+  padding-left: 40px;
+}
+.hero__card-big .hero__info .hero__big-name {
+  color: #fff;
+}
+.hero__card-big .hero__info .hero__big-realname {
+  color: #fff;
+}
+.hero__card-big .hero__info .hero__big-species {
+  color: #fff;
+}
+.hero__card-big .hero__info .hero__big-status {
+  color: #fff;
+}
+.hero__card-big .hero__info .hero__big-citizenship {
+  color: #fff;
+}
+.hero__card-big .hero__info .hero__big-movies {
+  color: #fff;
+}
