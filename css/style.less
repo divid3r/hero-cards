@@ -114,16 +114,23 @@ body {
 
 .hero__card-big {
    width: 1024px;
-   height: 600px;
+   height: 630px;
    position: relative;
    margin: 0 auto;
    display: flex;
+   background-color: #151515;
 
    .hero__popup-close-btn {
       position: absolute;
       right: 0;
-      top: 0;
+      top: -38px;
       cursor: pointer;
+      transition: background-color .3s ease;
+
+      &:hover {
+         background-color: red;
+         transition: background-color .3s ease;
+      }
 
       img {
          width: 35px;
@@ -134,8 +141,14 @@ body {
    .arrow {
       cursor: pointer;
       width: 40px;
-      height: 40px;
+      height: 50px;
       position: absolute;
+      transition: background-color .3s ease;
+
+      &:hover {
+         transition: background-color .3s ease;
+         background-color: rgba(red, .7);
+      }
    }
 
    .arrow-left {
@@ -151,36 +164,85 @@ body {
    }
 
    .hero__photo-big {
+      width: 400px;
+
       img {
          width: 400px;
+         height: 600px;
+         padding-top: 30px;
+         padding-left: 30px;
+         object-fit: cover;
+         object-position: top;
       }
    }
 
    .hero__info {
-      padding-left: 40px;
+      padding: 30px 30px 30px 50px;
 
       .hero__big-name {
-         color: #fff;
+         color: #e62429;
+         font-size: 34px;
+         font-weight: bold;
+         margin-bottom: 10px;
+         text-transform: uppercase;
       }
 
       .hero__big-realname {
+         color: #bbb;
+         font-size: 24px;
+         font-weight: 500;
+         margin-bottom: 50px;
+         text-transform: uppercase;
+      }
+
+      .hero__big-actors {
          color: #fff;
+         font-size: 24px;
+         font-weight: 400;
+         margin-bottom: 10px;
+         text-transform: uppercase;
+
+         span {
+            text-transform: lowercase;
+         }
       }
 
       .hero__big-species {
          color: #fff;
+         font-size: 24px;
+         font-weight: 400;
+         margin-bottom: 10px;
       }
 
       .hero__big-status {
          color: #fff;
+         font-size: 24px;
+         font-weight: 400;
+         margin-bottom: 10px;
       }
 
       .hero__big-citizenship {
          color: #fff;
+         font-size: 24px;
+         font-weight: 400;
+         margin-bottom: 50px;
       }
 
       .hero__big-movies {
          color: #fff;
+         font-size: 24px;
+         font-weight: 400;
+         display: flex;
+         flex-wrap: wrap;
+
+         .movie {
+            background-color: #801336;
+            color: #fff;
+            margin: 5px;
+            padding: 5px;
+            font-weight: 500;
+            font-size: 18px;
+         }
       }
    }
 }

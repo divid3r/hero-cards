@@ -69,8 +69,19 @@ const renderCard = (data) => {
    });
 }
 
-// render modal window with additional info of hero
+// render modal window with additional info about a hero
 const renderCardBig = (data, index) => {
+   const movies = data[index]['movies'];
+   let strMovies = '';
+
+   if (movies) {
+      movies.forEach(movie => {
+          strMovies += '<span class="movie">' + movie + '</span>';
+      });
+   } else {
+      strMovies += 'no movies';
+   }
+
    heroPopup.innerHTML = `
       <div class="hero__card-big">
          <div class="hero__popup-close-btn"><img src="img/close.svg" alt="" /></div>
@@ -78,13 +89,13 @@ const renderCardBig = (data, index) => {
          <div class="arrow arrow-right" id="arrowRight"></div>
          <div class="hero__photo-big"><img src="db_heroes/${data[index]['photo']}" alt="" /></div>
          <div class="hero__info">
-            <div class="hero__big-name">${data[index]['name']}<div>
-            <div class="hero__big-realname">${data[index]['realName']}<div>
-            <div class="hero__big-species">${data[index]['species']}<div>
-            <div class="hero__big-actors">${data[index]['actors']}<div>
-            <div class="hero__big-status">(${data[index]['birthDay']} - ${data[index]['deathDay']})<div>
-            <div class="hero__big-citizenship">${data[index]['citizenship']}<div>
-            <div class="hero__big-movies">${data[index]['movies']}<div>
+            <div class="hero__big-name">${data[index]['name']}</div>
+            <div class="hero__big-realname"></span>${data[index]['realName']}</div>
+            <div class="hero__big-actors"><span>actor: </span>${data[index]['actors']}</div>
+            <div class="hero__big-species">${data[index]['species']}</div>
+            <div class="hero__big-status">${data[index]['birthDay'] ? data[index]['birthDay'] : 'unknown'} - ${data[index]['deathDay'] ? data[index]['deathDay'] : 'unknown'}</div>
+            <div class="hero__big-citizenship">${data[index]['citizenship'] ? data[index]['citizenship'] : 'unknown'}</div>
+            <div class="hero__big-movies">${strMovies}</div>
          </div>
       </div>
    `;
