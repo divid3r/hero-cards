@@ -1,7 +1,11 @@
 'use strict'
 
 const heroCards = document.querySelector('.hero__cards'),
-      heroPopup = document.getElementById('heroPopup');
+      heroPopup = document.getElementById('heroPopup'),
+      heroFilterBtn = document.getElementById('heroFilterBtn'),
+      heroMoviesFilter = document.getElementById('heroMoviesFilter'),
+      heroAllFilters = document.getElementById('heroAllFilters');
+let movies = [];
 
 // get info about heroes from .json file
 fetch('../db_heroes/dbheroes.json')
@@ -13,6 +17,62 @@ fetch('../db_heroes/dbheroes.json')
    })
    .then((data) => {
       renderCard(data);
+
+      heroFilterBtn.addEventListener('click', () => {
+         heroAllFilters.style.display = 'flex';
+
+         // Make the select element for a list of movies
+         heroMoviesFilter.innerHTML = '';
+         movies = [];
+         const moviesList = document.createElement('select');
+         moviesList.classList.add('hero__movies-list');
+         heroMoviesFilter.appendChild(moviesList);
+
+         // Get the list of movies from .json file
+         data.forEach(hero => {
+            if (hero.movies) {
+               for (let movie of hero.movies) {
+                  movies = movies.concat(movie); // Unite repeated movies
+               }
+            }
+         });
+
+         // Make an elements (movies) for select element
+         movies.forEach((movie, index) => {
+            const moviesItem = document.createElement('option');
+            if (index === 0) {
+               moviesItem.classList.add('hero__movies-item');
+               moviesItem.value = '';
+               moviesItem.innerText = `Choose a movie ...`;
+               moviesList.appendChild(moviesItem);
+            } else {
+               moviesItem.classList.add('hero__movies-item');
+               moviesItem.value = movie;
+               moviesItem.innerText = movie;
+               moviesList.appendChild(moviesItem);
+            }
+         });
+
+         moviesList.addEventListener('change', (event) => {
+            const target = event.target.value;
+            let newData = []; // New data variable for a filtered heroes
+
+            // Filter of heroes by movie
+            data.forEach(hero => {
+               if (hero.movies) {
+                  for (let movie of hero.movies) {
+                     if (movie === target) {
+                        newData.push(hero);
+                     }
+                  }
+               }
+            });
+
+            if (target === '') {
+               renderCard(data);
+            } else renderCard(newData);
+         });
+      });
    })
    .catch((error) => {
       console.log(error);
@@ -21,6 +81,7 @@ fetch('../db_heroes/dbheroes.json')
 // render hero card
 const renderCard = (data) => {
    let i = 0;
+   heroCards.innerHTML = '';
 
    data.forEach(elem => {
       let heroCard = document.createElement('div');
@@ -32,6 +93,8 @@ const renderCard = (data) => {
          <div class="hero__real-name">${elem['realName']}</div>
       `;
       i++;
+      heroCards.appendChild(heroCard);
+
       heroCard.addEventListener('click', (event) => {
          heroPopup.style.display = 'flex';
          renderCardBig(data, heroCard.id);
@@ -49,7 +112,9 @@ const renderCard = (data) => {
             if (target.closest('#arrowLeft')) {
                if (index <= 0) {
                   index = 0;
-               } else index--;
+               } else {
+                  index--;
+               }
 
                renderCardBig(data, index);
             }
@@ -58,14 +123,13 @@ const renderCard = (data) => {
             if (target.closest('#arrowRight')) {
                if (index === data.length - 1) {
                   index = data.length - 1;
-               } else index++;
-
-               renderCardBig(data, index);
+               } else {
+                  index++;
+                  renderCardBig(data, index);
+               }
             }
          });
       });
-
-      heroCards.appendChild(heroCard);
    });
 }
 
@@ -90,7 +154,7 @@ const renderCardBig = (data, index) => {
          <div class="hero__photo-big"><img src="db_heroes/${data[index]['photo']}" alt="" /></div>
          <div class="hero__info">
             <div class="hero__big-name">${data[index]['name']}</div>
-            <div class="hero__big-realname"></span>${data[index]['realName']}</div>
+            <div class="hero__big-realname"></span>${data[index]['realName'] ? data[index]['realName'] : 'unknown'}</div>
             <div class="hero__big-actors"><span>actor: </span>${data[index]['actors']}</div>
             <div class="hero__big-species">${data[index]['species']}</div>
             <div class="hero__big-status">${data[index]['birthDay'] ? data[index]['birthDay'] : 'unknown'} - ${data[index]['deathDay'] ? data[index]['deathDay'] : 'unknown'}</div>

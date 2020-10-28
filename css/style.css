@@ -26,7 +26,7 @@ body {
 }
 .hero__cards {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   padding: 0 5px;
 }
@@ -111,7 +111,7 @@ body {
   transition: background-color 0.3s ease;
 }
 .hero__card-big .hero__popup-close-btn:hover {
-  background-color: red;
+  background-color: rgba(255, 0, 0, 0.7);
   transition: background-color 0.3s ease;
 }
 .hero__card-big .hero__popup-close-btn img {
@@ -121,7 +121,7 @@ body {
 .hero__card-big .arrow {
   cursor: pointer;
   width: 40px;
-  height: 50px;
+  height: 60px;
   position: absolute;
   transition: background-color 0.3s ease;
 }
@@ -131,11 +131,13 @@ body {
 }
 .hero__card-big .arrow-left {
   background: url(../img/chevron-left.svg) center center no-repeat;
+  background-size: 40px 40px;
   left: -25%;
   top: calc(50% - 20px);
 }
 .hero__card-big .arrow-right {
   background: url(../img/chevron-right.svg) center center no-repeat;
+  background-size: 40px 40px;
   right: -25%;
   top: calc(50% - 20px);
 }
@@ -209,4 +211,7 @@ body {
   padding: 5px;
   font-weight: 500;
   font-size: 18px;
+}
+.hero__all-filters {
+  display: none;
 }
