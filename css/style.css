@@ -214,4 +214,14 @@ body {
 }
 .hero__all-filters {
   display: none;
+  flex-direction: column;
+}
+.hero__all-filters.show {
+  display: flex;
+}
+.hero__filter-btn {
+  cursor: pointer;
+}
+.hero__movies-list {
+  cursor: pointer;
 }
