@@ -3,15 +3,13 @@
 const heroCards = document.querySelector('.hero__cards'),
       heroPopup = document.getElementById('heroPopup'),
       heroFilterBtn = document.getElementById('heroFilterBtn'),
-      heroMoviesFilter = document.getElementById('heroMoviesFilter'),
       heroAllFilters = document.getElementById('heroAllFilters'),
       heroGenderFilter = document.getElementById('heroGenderFilter'),
       heroStatusFilter = document.getElementById('heroStatusFilter'),
-      heroSpeciesFilter = document.getElementById('heroSpeciesFilter');
-let movies = [],
-    species = [];
+      heroMovieFilter = document.getElementById('heroMoviesFilter');
+let movies = [];
 
-// get info about heroes from .json file
+// Get info about heroes from .json file
 fetch('../db_heroes/dbheroes.json')
    .then((response) => {
       if (response.status !== 200) {
@@ -22,152 +20,151 @@ fetch('../db_heroes/dbheroes.json')
    .then((data) => {
       renderCard(data);
 
-      // Open all filters
+      // GENDER Make an elements for the filter
+      heroGenderFilter.innerHTML = `
+         <div class="hero__filter-title">
+            <h3 class="hero__filter-text">Filter by gender</h3>
+            <button type="button" class="hero__gender-filter-btn hero__filter-btn">reset</button>
+         </div>
+         <div class="hero__filter-items">
+            <div class="hero__gender-item hero__filter-item">Male</div>
+            <div class="hero__gender-item hero__filter-item">Female</div>
+         </div>
+      `;
+      // *** GENDER Make an elements for the filter
+
+      // STATUS Make an elements for the filter
+      heroStatusFilter.innerHTML = `
+         <div class="hero__filter-title">
+            <h3 class="hero__filter-text">Filter by status</h3>
+            <button type="button" class="hero__status-filter-btn hero__filter-btn">reset</button>
+         </div>
+         <div class="hero__filter-items">
+            <div class="hero__status-item hero__filter-item">Alive</div>
+            <div class="hero__status-item hero__filter-item">Deceased</div>
+         </div>
+      `;
+      // *** STATUS Make an elements for the filter
+
+      // MOVIE Make an elements for the filter
+      heroMovieFilter.innerHTML = `
+         <div class="hero__filter-title">
+            <h3 class="hero__filter-text">Filter by movie</h3>
+            <button type="button" class="hero__movie-filter-btn hero__filter-btn">reset</button>
+         </div>
+         <div class="hero__movie-filter-items hero__filter-items" id="heroMovieFilterItems"></div>
+      `;
+      const heroMovieFilterItems = document.getElementById('heroMovieFilterItems');
+
+      data.forEach(hero => { // Get the list of movies from .json file
+         if (hero.movies) {
+            for (let movie of hero.movies) {
+               movies.push(movie);
+            }
+         }
+      });
+      movies = [... new Set(movies)]; // Unite a repeated movies
+
+      movies.forEach(movie => {
+         const heroMovieItem = document.createElement('div');
+         heroMovieItem.classList.add('hero__movie-item');
+         heroMovieItem.classList.add('hero__filter-item');
+         heroMovieItem.innerText = movie;
+         heroMovieFilterItems.appendChild(heroMovieItem);
+      });
+      // *** MOVIE Make an elements for the filter
+
+      // HANDLER for filters block
       heroFilterBtn.addEventListener('click', () => {
          heroAllFilters.classList.toggle('show');
-
-         heroMoviesFilter.innerHTML = '';
-         heroGenderFilter.innerHTML = '';
-         heroStatusFilter.innerHTML = '';
-         heroSpeciesFilter.innerHTML = '';
-         movies = [];
-
-         // Make the <select> element for a list of movies
-         const moviesItems = document.createElement('select');
-         moviesItems.classList.add('hero__movie-items');
-         heroMoviesFilter.appendChild(moviesItems);
-
-         // Get the list of movies from .json file
-         data.forEach(hero => {
-            if (hero.movies) {
-               for (let movie of hero.movies) {
-                  movies = movies.concat(movie); // Unite repeated movies
-               }
-            }
-         });
-
-         // Make an elements (movies) for the <select> element
-         movies.forEach((movie, index) => {
-            const moviesItem = document.createElement('option');
-
-            if (index === 0) {
-               moviesItem.classList.add('hero__movie-item');
-               moviesItem.value = '';
-               moviesItem.innerText = `Choose a movie ...`;
-               moviesItems.appendChild(moviesItem);
-            } else {
-               moviesItem.classList.add('hero__movie-item');
-               moviesItem.value = movie;
-               moviesItem.innerText = movie;
-               moviesItems.appendChild(moviesItem);
-            }
-         });
-
-         // Make an elements for the gender selection
-         heroGenderFilter.innerHTML = `
-            <select class="hero__gender-items">
-               <option class="hero__gender-item" value="">Choose a gender</option>
-               <option class="hero__gender-item" value="male">male</option>
-               <option class="hero__gender-item" value="female">female</option>
-            </select>
-         `;
-
-         // Make an elements for the status selection
-         heroStatusFilter.innerHTML = `
-            <select class="hero__status-items">
-               <option class="hero__status-item" value="">Choose a status</option>
-               <option class="hero__status-item" value="deceased">deceased</option>
-               <option class="hero__status-item" value="alive">alive</option>
-            </select>
-         `;
-
-
-         // Make an elements for the species selection
-         data.forEach(hero => {
-            if (hero.species) {
-               species.push(hero.species);
-            }
-         });
-
-         species = [... new Set(species)]; // Unite the same values
-         const heroSpeciesItems = document.createElement('select'); // Make <select> element
-         heroSpeciesItems.classList.add('hero__species-items');
-         heroSpeciesFilter.appendChild(heroSpeciesItems);
-
-         // Add an <option> elements to <select>
-         const heroSpeciesItem = document.createElement('option');
-         heroSpeciesItem.classList.add('hero__species-item');
-         heroSpeciesItem.value = '';
-         heroSpeciesItem.innerText = 'Choose a species';
-         heroSpeciesItems.insertBefore(heroSpeciesItem, heroSpeciesItems.firstChild);
-
-         species.forEach((elem, index) => {
-            const heroSpeciesItem = document.createElement('option');
-            heroSpeciesItem.classList.add('hero__species-item');
-            heroSpeciesItem.value = elem;
-            heroSpeciesItem.innerText = elem;
-            heroSpeciesItems.appendChild(heroSpeciesItem);
-         });
-
          
-         // Filter's handler
-         let selected = [0, 0, 0, 0, 0], // Arrya of selected filters
-             heroFiltered = [],
-             buff = [];
+         // HANDLER for filters block
+         let selected = [0, 0, 0], // Arrya of selected filters
+             heroFiltered = [], // Filtered heroes
+             buff = []; // Buffer
+         const heroGenderItemAll = document.querySelectorAll('.hero__gender-item'),
+               heroStatusItemAll = document.querySelectorAll('.hero__status-item'),
+               heroMovieItemAll = document.querySelectorAll('.hero__movie-item');
 
-         heroAllFilters.addEventListener('change', (event) => {
+         heroAllFilters.addEventListener('click', (event) => {
             let target = event.target;
-            heroFiltered = [];
+            heroFiltered = data;
 
-            if (target.matches('.hero__movie-items')) {
-               if (target.value === '') {
-                  selected[0] = 0;
-               } else {
-                  selected[0] = target.value;
-               }
-            }
-
-            if (target.matches('.hero__gender-items')) {
-               if (target.value === '') {
-                  selected[1] = 0;
-               } else {
-                  selected[1] = target.value;
-               }
-            }
-
-            if (target.matches('.hero__status-items')) {
-               if (target.value === '') {
-                  selected[2] = 0;
-               } else {
-                  selected[2] = target.value;
-               }
-            }
-
-            if (target.matches('.hero__species-items')) {
-               if (target.value === '') {
-                  selected[3] = 0;
-               } else {
-                  selected[3] = target.value;
-               }
-            }
-
-            // Filter by movie
-            if (selected[0] === 0) {
-               heroFiltered = data;
-            } else {
-               data.forEach(hero => {
-                  if (hero.movies) {
-                     for (let movie of hero.movies) {
-                        if (movie === selected[0]) {
-                           heroFiltered.push(hero);
-                        }
-                     }
+            // HANDLERS
+            // Handler by GENDER
+            if (target.matches('.hero__gender-item')) {
+               for (let item of heroGenderItemAll) {
+                  if (item.classList.contains('hold')) {
+                     item.classList.remove('hold');
                   }
-               });
+               }
+
+               target.classList.toggle('hold');
+               selected[0] = target.innerText;
             }
 
-            // Filter by gender
-            if (selected[1] === 'male') {
+            if (target.matches('.hero__gender-filter-btn')) {
+               selected[0] = 0;
+
+               for (let item of heroGenderItemAll) {
+                  if (item.classList.contains('hold')) {
+                     item.classList.remove('hold');
+                  }
+               }
+            }
+            // *** Handler by GENDER
+
+            // Handler by STATUS
+            if (target.matches('.hero__status-item')) {
+               for (let item of heroStatusItemAll) {
+                  if (item.classList.contains('hold')) {
+                     item.classList.remove('hold');
+                  }
+               }
+
+               target.classList.toggle('hold');
+               selected[1] = target.innerText;
+            }
+
+            if (target.matches('.hero__status-filter-btn')) {
+               selected[1] = 0;
+
+               for (let item of heroStatusItemAll) {
+                  if (item.classList.contains('hold')) {
+                     item.classList.remove('hold');
+                  }
+               }
+            }
+            // *** Handler by STATUS
+
+            // Handler by MOVIE
+            if (target.matches('.hero__movie-item')) {
+               for (let item of heroMovieItemAll) {
+                  if (item.classList.contains('hold')) {
+                      item.classList.remove('hold');
+                  }
+               }
+
+               target.classList.toggle('hold');
+               selected[2] = target.innerText;
+            }
+
+            if (target.matches('.hero__movie-filter-btn')) {
+               selected[2] = 0;
+
+               for (let item of heroMovieItemAll) {
+                  if (item.classList.contains('hold')) {
+                      item.classList.remove('hold');
+                  }
+               }
+            }
+            // *** Handler by MOVIE
+            // *** HANDLERS
+
+
+            // FILTERS
+            // Filter by GENDER
+            if (selected[0] === 'Male') {
                heroFiltered.forEach(hero => {
                   if (hero.gender) {
                      if (hero.gender.toLowerCase() === 'male') {
@@ -180,7 +177,7 @@ fetch('../db_heroes/dbheroes.json')
                buff = [];
             }
 
-            if (selected[1] === 'female') {
+            if (selected[0] === 'Female') {
                heroFiltered.forEach(hero => {
                   if (hero.gender) {
                      if (hero.gender.toLowerCase() === 'female') {
@@ -192,12 +189,13 @@ fetch('../db_heroes/dbheroes.json')
                heroFiltered = buff;
                buff = [];
             }
+            // *** Filter by GENDER
 
-            // Filter by status
-            if (selected[2] === 'deceased') {
+            // Filter by STATUS
+            if (selected[1] === 'Deceased') {
                heroFiltered.forEach(hero => {
                   if (hero.status) {
-                     if (hero.status === 'deceased') {
+                     if (hero.status.toLowerCase() === 'deceased') {
                         buff.push(hero);
                      }
                   }
@@ -207,10 +205,10 @@ fetch('../db_heroes/dbheroes.json')
                buff = [];
             }
 
-            if (selected[2] === 'alive') {
+            if (selected[1] === 'Alive') {
                heroFiltered.forEach(hero => {
                   if (hero.status) {
-                     if (hero.status === 'alive') {
+                     if (hero.status.toLowerCase() === 'alive') {
                         buff.push(hero);
                      }
                   }
@@ -219,30 +217,38 @@ fetch('../db_heroes/dbheroes.json')
                heroFiltered = buff;
                buff = [];
             }
+            // *** Filter by STATUS
 
-            // Filter by species
-            // heroFiltered.forEach(hero => {
-            //    if (hero.species) {
-            //       if (hero.species === selected[3]) {
-            //          buff.push(hero);
-            //       }
-            //    }
-            // });
+            // Filter by MOVIE
+            heroFiltered.forEach(hero => {
+               if (hero.movies) {
+                  for (let movie of hero.movies) {
+                     if (movie === selected[2]) {
+                        buff.push(hero);
+                     }
+                  }
+               }
+            });
 
-            // if (buff.length !== 0) {
-            //    heroFiltered = buff;
-            //    buff = [];
-            // }
+            if (buff.length != 0) {
+               heroFiltered = buff;
+            }
+            buff = [];
+            // *** Filter by MOVIE
+            // *** FILTERS
 
             renderCard(heroFiltered);
          });
-
-
+         // *** HANDLER for filters block
       });
    })
    .catch((error) => {
       console.log(error);
    });
+
+const renderFilterElements = () => {
+
+}
 
 // render hero card
 const renderCard = (data) => {

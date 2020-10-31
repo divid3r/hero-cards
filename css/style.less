@@ -7,7 +7,7 @@
 body {
    font-family: 'Montserrat', sans-serif;
    // background: url(../img/sky.jpg) top center;
-   background-color: #202020;
+   background-color: #07252d;
 }
 
 .container {
@@ -17,7 +17,11 @@ body {
 
 .hero__title {
    text-transform: uppercase;
+   // color: #0e3742;
    color: #fff;
+   text-shadow: 0 0 10px #03bcf4;
+   // -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
+   outline: none;
    font-size: 40px;
    letter-spacing: -2px;
    font-weight: bold;
@@ -30,11 +34,111 @@ body {
    }
 }
 
+// Filters
+.hero__all-filters {
+   display: none;
+   flex-direction: column;
+   background-color: #07252d;
+   border-radius: 5px;
+   overflow: hidden;
+
+   &.show {
+      display: flex;
+      margin-top: 20px;
+   }
+}
+
+.hero__filters {
+   margin: 0 15px;
+
+   .hero__filter-btn {
+      border: none;
+      cursor: pointer;
+      border-radius: 3px;
+      padding: 7px;
+      font-size: 16px;
+      text-transform: uppercase;
+      font-weight: bold;
+      background-color: #e62629;
+      color: #fff;
+      transition: box-shadow .3s ease;
+      outline: none;
+
+      &:hover {
+         background-color: lighten(#e62629, 10%);
+         box-shadow: 0 0 10px #fff;
+         transition: box-shadow .3s ease;
+      }
+   }
+
+   .hero__filter-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 15px 5px 15px;
+      border-top: 1px solid #e62629;
+      box-sizing: border-box;
+
+      .hero__filter-text {
+         color: #fff;
+      }
+
+      .hero__gender-filter-btn,
+      .hero__status-filter-btn,
+      .hero__movie-filter-btn {
+         height: 28px;
+         font-size: 14px;
+         margin-bottom: 0;
+      }
+   }
+
+   .hero__filter-items {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 10px;
+
+      .hero__filter-item {
+         color: lighten(#3282b8, 25%);
+         cursor: pointer;
+         padding: 4px;
+         margin: 0 5px 10px 5px;
+         font-size: 15px;
+         transition: background-color .3s ease;
+         border-radius: 3px;
+
+         &.hold {
+            background-color: #e62629;
+            color: #fff;
+            font-weight: bold;
+         }
+
+         &:hover {
+            background-color: #e62629;
+            color: #fff;
+            font-weight: bold;
+            transition: background-color .3s ease;
+            border-radius: 3px;
+         }
+      }
+   }
+
+   .hero__movie-filter-items {
+      justify-content: space-between;
+      .hero__movie-item {
+         width: 338px;
+         overflow: hidden;
+      }
+   }
+}
+// *** Filters
+
+// Cards
 .hero__cards {
    display: flex;
    justify-content: flex-start;
    flex-wrap: wrap;
-   padding: 0 5px;
+   padding: 5px;
+   padding-top: 15px;
 }
 
 .hero__card {
@@ -42,13 +146,13 @@ body {
    margin: 10px;
    cursor: pointer;
    box-sizing: border-box;
-   box-shadow: 0px 0px 7px 0px rgba(100,100,100,0.75);
+   box-shadow: 0px 0px 7px 0px rgba(#03bcf4, .5);
    background-color: #151515;
    border-radius: 10px;
    transition: box-shadow .3s ease-in-out;
 
    &:hover {
-      box-shadow: 0px 0px 15px 0px rgba(255,255,255,0.75);
+      box-shadow: 0px 0px 25px 0px rgba(#03bcf4,0.75);
       transition: box-shadow .3s ease-in-out;
 
       .hero__photo img {
@@ -248,20 +352,4 @@ body {
       }
    }
 }
-
-.hero__all-filters {
-   display: none;
-   flex-direction: column;
-
-   &.show {
-      display: flex;
-   }
-}
-
-.hero__filter-btn {
-   cursor: pointer;
-}
-
-.hero__movies-list {
-   cursor: pointer;
-}
+// *** Cards
