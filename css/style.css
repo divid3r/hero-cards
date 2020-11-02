@@ -237,14 +237,19 @@ body {
   position: absolute;
   width: 40px;
   height: 40px;
-  right: -50px;
-  top: -50px;
+  right: 50px;
+  top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: background-color 0.3s ease;
   border-radius: 50%;
+}
+@media all and (max-width: 1024px) {
+  .hero__card-big .hero__popup-close-btn {
+    display: none;
+  }
 }
 .hero__card-big .hero__popup-close-btn:hover {
   background-color: rgba(255, 0, 0, 0.7);
@@ -333,7 +338,6 @@ body {
   }
 }
 .hero__card-big .hero__info {
-  position: relative;
   animation-name: bigAnimation;
   animation-duration: 1s;
 }

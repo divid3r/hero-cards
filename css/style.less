@@ -263,14 +263,18 @@ body {
       position: absolute;
       width: 40px;
       height: 40px;
-      right: -50px;
-      top: -50px;
+      right: 50px;
+      top: 50px;
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
       transition: background-color .3s ease;
       border-radius: 50%;
+
+      @media all and (max-width: 1024px) {
+         display: none;
+      }
 
       &:hover {
          background-color: rgba(red, .7);
@@ -359,7 +363,6 @@ body {
    }
 
    .hero__info {
-      position: relative;
       animation-name: bigAnimation;
       animation-duration: 1s;
 

@@ -156,11 +156,11 @@ const renderCardBig = (data, index) => {
 
    heroPopup.innerHTML = `
       <div class="hero__card-big">
+         <div class="hero__popup-close-btn"><img src="img/close.svg" alt="" /></div>
          <div class="arrow arrow-left" id="arrowLeft"></div>
          <div class="arrow arrow-right" id="arrowRight"></div>
          <div class="hero__photo-big"><img src="db_heroes/${data[index]['photo']}" alt="" /></div>
          <div class="hero__info">
-            <div class="hero__popup-close-btn"><img src="img/close.svg" alt="" /></div>
             <div class="hero__big-name">${data[index]['name']}</div>
             <div class="hero__big-realname"></span>${data[index]['realName'] ? data[index]['realName'] : ''}</div>
             <div class="hero__big-actors"><span>actor: </span>${data[index]['actors']}</div>
