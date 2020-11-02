@@ -151,7 +151,7 @@ const renderCardBig = (data, index) => {
           strMovies += '<span class="movie">' + movie + '</span>';
       });
    } else {
-      strMovies += 'no movies';
+      strMovies += 'no movies'
    }
 
    heroPopup.innerHTML = `
