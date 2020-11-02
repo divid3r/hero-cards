@@ -162,7 +162,7 @@ const renderCardBig = (data, index) => {
          <div class="hero__photo-big"><img src="db_heroes/${data[index]['photo']}" alt="" /></div>
          <div class="hero__info">
             <div class="hero__big-name">${data[index]['name']}</div>
-            <div class="hero__big-realname"></span>${data[index]['realName'] ? data[index]['realName'] : 'unknown'}</div>
+            <div class="hero__big-realname"></span>${data[index]['realName'] ? data[index]['realName'] : ''}</div>
             <div class="hero__big-actors"><span>actor: </span>${data[index]['actors']}</div>
             <div class="hero__big-species">${data[index]['species']}</div>
             <div class="hero__big-status">${data[index]['birthDay'] ? data[index]['birthDay'] : 'unknown'} - ${data[index]['deathDay'] ? data[index]['deathDay'] : 'unknown'}</div>
@@ -194,70 +194,40 @@ const handlers = (data) => {
       // HANDLERS
       // Handler by GENDER
       if (target.matches('.hero__gender-item')) {
-         for (let item of heroGenderItemAll) {
-            if (item.classList.contains('hold')) {
-               item.classList.remove('hold');
-            }
-         }
-
+         removeSelection(heroGenderItemAll);
          target.classList.toggle('hold');
          selected[0] = target.innerText;
       }
 
       if (target.matches('.hero__gender-filter-btn')) {
          selected[0] = 0;
-
-         for (let item of heroGenderItemAll) {
-            if (item.classList.contains('hold')) {
-               item.classList.remove('hold');
-            }
-         }
+         removeSelection(heroGenderItemAll);
       }
       // *** Handler by GENDER
 
       // Handler by STATUS
       if (target.matches('.hero__status-item')) {
-         for (let item of heroStatusItemAll) {
-            if (item.classList.contains('hold')) {
-               item.classList.remove('hold');
-            }
-         }
-
+         removeSelection(heroStatusItemAll);
          target.classList.toggle('hold');
          selected[1] = target.innerText;
       }
 
       if (target.matches('.hero__status-filter-btn')) {
          selected[1] = 0;
-
-         for (let item of heroStatusItemAll) {
-            if (item.classList.contains('hold')) {
-               item.classList.remove('hold');
-            }
-         }
+         removeSelection(heroStatusItemAll);
       }
       // *** Handler by STATUS
 
       // Handler by MOVIE
       if (target.matches('.hero__movie-item')) {
-         for (let item of heroMovieItemAll) {
-            if (item.classList.contains('hold')) {
-                  item.classList.remove('hold');
-            }
-         }
-
+         removeSelection(heroMovieItemAll);
          target.classList.toggle('hold');
          selected[2] = target.innerText;
       }
 
       if (target.matches('.hero__movie-filter-btn')) {
          selected[2] = 0;
-
-         for (let item of heroMovieItemAll) {
-            if (item.classList.contains('hold')) {
-                  item.classList.remove('hold');
-            }
-         }
+         removeSelection(heroMovieItemAll);
       }
       // *** Handler by MOVIE
       // *** HANDLERS
@@ -343,5 +313,15 @@ const handlers = (data) => {
 });
 }
 // *** HANDLER for filters block
+
+// Remove selection from element
+const removeSelection = (block) => {
+   for (let item of block) {
+      if (item.classList.contains('hold')) {
+            item.classList.remove('hold');
+      }
+   }
+}
+// *** Remove selection from element
 
 
