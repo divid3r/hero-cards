@@ -20,7 +20,18 @@ body {
   letter-spacing: -2px;
   font-weight: bold;
   display: flex;
-  justify-content: center;
+}
+@media all and (min-width: 577px) {
+  .hero__title {
+    justify-content: center;
+  }
+}
+@media all and (max-width: 576px) {
+  .hero__title {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 }
 .hero__title img {
   width: 100px;
@@ -111,7 +122,7 @@ body {
 }
 .hero__cards {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   padding: 5px;
   padding-top: 15px;
@@ -173,28 +184,67 @@ body {
 .hero__popup {
   display: none;
   justify-content: center;
-  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(51, 51, 51, 0.8);
+  background-color: rgba(7, 37, 45, 0.97);
+}
+@media all and (min-width: 1025px) {
+  .hero__popup {
+    align-items: center;
+  }
+}
+@keyframes bigAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 .hero__card-big {
-  width: 1024px;
-  height: 630px;
-  position: relative;
   margin: 0 auto;
   display: flex;
-  background-color: #151515;
+  background-color: #000;
+  border-radius: 10px;
+  box-shadow: 0px 0px 100px 0px rgba(3, 188, 244, 0.5);
+}
+@media all and (min-width: 1281px) {
+  .hero__card-big {
+    width: 1024px;
+    min-height: 630px;
+  }
+}
+@media all and (max-width: 1280px) {
+  .hero__card-big {
+    width: 768px;
+    min-height: 430px;
+  }
+}
+@media all and (max-width: 1024px) {
+  .hero__card-big {
+    flex-direction: column;
+    align-items: center;
+    max-width: 480px;
+    height: auto;
+    margin: 15px 60px;
+    padding: 15px;
+  }
 }
 .hero__card-big .hero__popup-close-btn {
   position: absolute;
-  right: 0;
-  top: -38px;
+  width: 40px;
+  height: 40px;
+  right: 0px;
+  top: -50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-radius: 50%;
 }
 .hero__card-big .hero__popup-close-btn:hover {
   background-color: rgba(255, 0, 0, 0.7);
@@ -210,6 +260,7 @@ body {
   height: 60px;
   position: absolute;
   transition: background-color 0.3s ease;
+  border-radius: 5px;
 }
 .hero__card-big .arrow:hover {
   transition: background-color 0.3s ease;
@@ -218,70 +269,180 @@ body {
 .hero__card-big .arrow-left {
   background: url(../img/chevron-left.svg) center center no-repeat;
   background-size: 40px 40px;
-  left: -25%;
   top: calc(50% - 20px);
+}
+@media all and (min-width: 1025px) {
+  .hero__card-big .arrow-left {
+    left: 40px;
+  }
+}
+@media all and (max-width: 1024px) {
+  .hero__card-big .arrow-left {
+    left: 0px;
+  }
 }
 .hero__card-big .arrow-right {
   background: url(../img/chevron-right.svg) center center no-repeat;
   background-size: 40px 40px;
-  right: -25%;
   top: calc(50% - 20px);
 }
+@media all and (min-width: 1025px) {
+  .hero__card-big .arrow-right {
+    right: 40px;
+  }
+}
+@media all and (max-width: 1024px) {
+  .hero__card-big .arrow-right {
+    right: 0px;
+  }
+}
 .hero__card-big .hero__photo-big {
-  width: 400px;
+  animation-name: bigAnimation;
+  animation-duration: 1s;
+}
+@media all and (min-width: 1281px) {
+  .hero__card-big .hero__photo-big {
+    width: 400px;
+  }
+}
+@media all and (max-width: 1280px) {
+  .hero__card-big .hero__photo-big {
+    width: 246px;
+  }
 }
 .hero__card-big .hero__photo-big img {
-  width: 400px;
-  height: 600px;
-  padding-top: 30px;
-  padding-left: 30px;
   object-fit: cover;
   object-position: top;
 }
+@media all and (min-width: 1281px) {
+  .hero__card-big .hero__photo-big img {
+    width: 400px;
+    height: 600px;
+  }
+}
+@media all and (max-width: 1280px) {
+  .hero__card-big .hero__photo-big img {
+    width: 246px;
+    height: 300px;
+  }
+}
+@media all and (min-width: 1025px) {
+  .hero__card-big .hero__photo-big img {
+    padding-top: 30px;
+    padding-left: 30px;
+  }
+}
 .hero__card-big .hero__info {
-  padding: 30px 30px 30px 50px;
+  animation-name: bigAnimation;
+  animation-duration: 1s;
+}
+@media all and (min-width: 1025px) {
+  .hero__card-big .hero__info {
+    padding: 30px 30px 30px 50px;
+  }
+}
+@media all and (max-width: 1024px) {
+  .hero__card-big .hero__info {
+    overflow-y: auto;
+  }
 }
 .hero__card-big .hero__info .hero__big-name {
   color: #e62429;
-  font-size: 34px;
   font-weight: bold;
   margin-bottom: 10px;
   text-transform: uppercase;
 }
+@media all and (min-width: 1025px) {
+  .hero__card-big .hero__info .hero__big-name {
+    font-size: 34px;
+  }
+}
+@media all and (max-width: 1024px) {
+  .hero__card-big .hero__info .hero__big-name {
+    font-size: 25px;
+  }
+}
 .hero__card-big .hero__info .hero__big-realname {
   color: #bbb;
-  font-size: 24px;
   font-weight: 500;
-  margin-bottom: 50px;
   text-transform: uppercase;
+}
+@media all and (min-width: 1025px) {
+  .hero__card-big .hero__info .hero__big-realname {
+    font-size: 24px;
+    margin-bottom: 50px;
+  }
+}
+@media all and (max-width: 1024px) {
+  .hero__card-big .hero__info .hero__big-realname {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
 }
 .hero__card-big .hero__info .hero__big-actors {
   color: #fff;
-  font-size: 24px;
   font-weight: 400;
   margin-bottom: 10px;
   text-transform: uppercase;
+}
+@media all and (min-width: 1025px) {
+  .hero__card-big .hero__info .hero__big-actors {
+    font-size: 24px;
+  }
+}
+@media all and (max-width: 1024px) {
+  .hero__card-big .hero__info .hero__big-actors {
+    font-size: 20px;
+  }
 }
 .hero__card-big .hero__info .hero__big-actors span {
   text-transform: lowercase;
 }
 .hero__card-big .hero__info .hero__big-species {
   color: #fff;
-  font-size: 24px;
   font-weight: 400;
   margin-bottom: 10px;
+}
+@media all and (min-width: 1025px) {
+  .hero__card-big .hero__info .hero__big-species {
+    font-size: 24px;
+  }
+}
+@media all and (max-width: 1024px) {
+  .hero__card-big .hero__info .hero__big-species {
+    font-size: 20px;
+  }
 }
 .hero__card-big .hero__info .hero__big-status {
   color: #fff;
-  font-size: 24px;
   font-weight: 400;
   margin-bottom: 10px;
 }
+@media all and (min-width: 1025px) {
+  .hero__card-big .hero__info .hero__big-status {
+    font-size: 24px;
+  }
+}
+@media all and (max-width: 1024px) {
+  .hero__card-big .hero__info .hero__big-status {
+    font-size: 20px;
+  }
+}
 .hero__card-big .hero__info .hero__big-citizenship {
   color: #fff;
-  font-size: 24px;
   font-weight: 400;
-  margin-bottom: 50px;
+}
+@media all and (min-width: 1025px) {
+  .hero__card-big .hero__info .hero__big-citizenship {
+    font-size: 24px;
+    margin-bottom: 50px;
+  }
+}
+@media all and (max-width: 1024px) {
+  .hero__card-big .hero__info .hero__big-citizenship {
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
 }
 .hero__card-big .hero__info .hero__big-movies {
   color: #fff;
@@ -291,10 +452,21 @@ body {
   flex-wrap: wrap;
 }
 .hero__card-big .hero__info .hero__big-movies .movie {
-  background-color: #801336;
+  background-color: #156e85;
   color: #fff;
   margin: 5px;
-  padding: 5px;
   font-weight: 500;
-  font-size: 18px;
+  border-radius: 5px;
+}
+@media all and (min-width: 1025px) {
+  .hero__card-big .hero__info .hero__big-movies .movie {
+    font-size: 18px;
+    padding: 5px;
+  }
+}
+@media all and (max-width: 1024px) {
+  .hero__card-big .hero__info .hero__big-movies .movie {
+    font-size: 16px;
+    padding: 4px;
+  }
 }
