@@ -180,7 +180,7 @@ const handlers = (data) => {
    heroAllFilters.classList.toggle('show');
    
    // HANDLER for filters block
-   let selected = [0, 0, 0], // Arrya of selected filters
+   let selected = [0, 0, 0], // Array of selected filters
        heroFiltered = [], // Filtered heroes
        buff = []; // Buffer
    const heroGenderItemAll = document.querySelectorAll('.hero__gender-item'),
@@ -222,7 +222,7 @@ const handlers = (data) => {
       if (target.matches('.hero__movie-item')) {
          removeSelection(heroMovieItemAll);
          target.classList.toggle('hold');
-         selected[2] = target.innerText;
+         selected[2] = target.innerText.toLowerCase();
       }
 
       if (target.matches('.hero__movie-filter-btn')) {
@@ -291,20 +291,20 @@ const handlers = (data) => {
       // *** Filter by STATUS
 
       // Filter by MOVIE
-      heroFiltered.forEach(hero => {
-         if (hero.movies) {
-            for (let movie of hero.movies) {
-               if (movie === selected[2]) {
-                  buff.push(hero);
+      if (selected[2] != 0) {
+         heroFiltered.forEach(hero => {
+            if (hero.movies) {
+               for (let movie of hero.movies) {
+                  if (movie.toLowerCase() === selected[2]) {
+                     buff.push(hero);
+                  }
                }
             }
-         }
-      });
+         });
 
-      if (buff.length != 0) {
          heroFiltered = buff;
+         buff = [];
       }
-      buff = [];
       // *** Filter by MOVIE
       // *** FILTERS
 

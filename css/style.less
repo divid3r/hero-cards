@@ -1,6 +1,7 @@
 * {
    margin: 0;
    padding: 0;
+   -webkit-box-sizing: border-box;
    box-sizing: border-box;
 }
 
@@ -16,7 +17,6 @@ body {
 
 .hero__title {
    text-transform: uppercase;
-   // color: #0e3742;
    color: #fff;
    text-shadow: 0 0 10px #03bcf4;
    // -webkit-box-reflect: below 1px linear-gradient(transparent, #0008);
@@ -24,15 +24,23 @@ body {
    font-size: 40px;
    letter-spacing: -2px;
    font-weight: bold;
+   display: -webkit-box;
+   display: -ms-flexbox;
    display: flex; 
 
    @media all and (min-width: 577px) {
-      justify-content: center;
-      
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center; 
    }
 
    @media all and (max-width: 576px) {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
       flex-direction: column;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
       align-items: center;
       text-align: center;
    }
@@ -46,12 +54,17 @@ body {
 // Filters
 .hero__all-filters {
    display: none;
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+   -ms-flex-direction: column;
    flex-direction: column;
    background-color: #07252d;
    border-radius: 5px;
    overflow: hidden;
 
    &.show {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
       margin-top: 20px;
    }
@@ -70,13 +83,22 @@ body {
       font-weight: bold;
       background-color: #e62629;
       color: #fff;
-      transition: box-shadow .3s ease;
+      -webkit-transition: -webkit-box-shadow 0.3s ease;
+      transition: -webkit-box-shadow 0.3s ease;
+      -o-transition: box-shadow 0.3s ease;
+      transition: box-shadow 0.3s ease;
+      transition: box-shadow 0.3s ease, -webkit-box-shadow 0.3s ease;
       outline: none;
 
       &:hover {
-         background-color: lighten(#e62629, 10%);
+         background-color: #eb5456;
+         -webkit-box-shadow: 0 0 10px #fff;
          box-shadow: 0 0 10px #fff;
-         transition: box-shadow .3s ease;
+         -webkit-transition: -webkit-box-shadow 0.3s ease;
+         transition: -webkit-box-shadow 0.3s ease;
+         -o-transition: box-shadow 0.3s ease;
+         transition: box-shadow 0.3s ease;
+         transition: box-shadow 0.3s ease, -webkit-box-shadow 0.3s ease;
       }
    }
 
@@ -359,6 +381,10 @@ body {
          @media all and (min-width: 1025px) {
             padding-top: 30px;
             padding-left: 30px;
+         }
+
+         @media all and (max-width: 1024px) {
+            padding: 0 15px;
          }
       }
    }

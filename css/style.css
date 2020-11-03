@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 body {
@@ -19,16 +20,25 @@ body {
   font-size: 40px;
   letter-spacing: -2px;
   font-weight: bold;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 @media all and (min-width: 577px) {
   .hero__title {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
   }
 }
 @media all and (max-width: 576px) {
   .hero__title {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     text-align: center;
   }
@@ -39,12 +49,17 @@ body {
 }
 .hero__all-filters {
   display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   background-color: #07252d;
   border-radius: 5px;
   overflow: hidden;
 }
 .hero__all-filters.show {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin-top: 20px;
 }
@@ -61,13 +76,22 @@ body {
   font-weight: bold;
   background-color: #e62629;
   color: #fff;
+  -webkit-transition: -webkit-box-shadow 0.3s ease;
+  transition: -webkit-box-shadow 0.3s ease;
+  -o-transition: box-shadow 0.3s ease;
   transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, -webkit-box-shadow 0.3s ease;
   outline: none;
 }
 .hero__filters .hero__filter-btn:hover {
   background-color: #eb5456;
+  -webkit-box-shadow: 0 0 10px #fff;
   box-shadow: 0 0 10px #fff;
+  -webkit-transition: -webkit-box-shadow 0.3s ease;
+  transition: -webkit-box-shadow 0.3s ease;
+  -o-transition: box-shadow 0.3s ease;
   transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, -webkit-box-shadow 0.3s ease;
 }
 .hero__filters .hero__filter-title {
   display: flex;
@@ -336,6 +360,11 @@ body {
   .hero__card-big .hero__photo-big img {
     padding-top: 30px;
     padding-left: 30px;
+  }
+}
+@media all and (max-width: 1024px) {
+  .hero__card-big .hero__photo-big img {
+    padding: 0 15px;
   }
 }
 .hero__card-big .hero__info {
